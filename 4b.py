@@ -8,11 +8,9 @@ def find_xmas(grid):
     directions = [
         (1, 1),  # Diagonalnie w dół w prawo
         (1, -1), # Diagonalnie w dół w lewo
-        (-1, 1), # Diagonalnie w górę w prawo
-        (-1, -1) # Diagonalnie w górę w lewo
     ]
     def checkio(data):
-        duplicates = {k for k, v in Counter(data).items() if v >= 4}
+        duplicates = {k for k, v in Counter(data).items() if v >= 2}
         result = [el for el in data if el in duplicates]
         return result
     def is_valid(x, y):
@@ -45,5 +43,5 @@ with open('4.txt', 'r') as file:
         grid.append(line[:-1])
 
 result = find_xmas(grid)
-print(len(result)/4)
+print(int(len(result)/2))
 

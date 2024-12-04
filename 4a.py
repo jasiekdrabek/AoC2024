@@ -5,13 +5,9 @@ def find_xmas(grid):
     reversed_word = word[::-1]
     directions = [
         (0, 1),  # Poziomo w prawo
-        (0, -1), # Poziomo w lewo
         (1, 0),  # Pionowo w dół
-        (-1, 0), # Pionowo w górę
         (1, 1),  # Diagonalnie w dół w prawo
         (1, -1), # Diagonalnie w dół w lewo
-        (-1, 1), # Diagonalnie w górę w prawo
-        (-1, -1) # Diagonalnie w górę w lewo
     ]
 
     def is_valid(x, y):
@@ -44,5 +40,5 @@ with open('4.txt', 'r') as file:
         grid.append(line[:-1])
 
 result = find_xmas(grid)
-print(len(result)/2)
+print(len(result))
 
