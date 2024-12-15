@@ -34,7 +34,7 @@ def move_robot_and_boxes(robot, left_box, right_box, walls, moves):
     }
     def get_right_box(dx,dy,last):
         if (last[0] + dx, last[1] + dy) in walls:
-            return False
+            return
         elif (last[0] + dx, last[1] + dy) in right_box:
             right_chain.add((last[0] + dx, last[1] + dy))
             left_chain.add((last[0] + dx - 1,last[1] + dy))
@@ -45,12 +45,10 @@ def move_robot_and_boxes(robot, left_box, right_box, walls, moves):
             left_chain.add((last[0] + dx, last[1] + dy))
             get_right_box(dx,dy,(last[0] + dx + 1, last[1] + dy))
             get_left_box(dx,dy,(last[0] + dx, last[1] + dy))
-        else:
-            return False
         
     def get_left_box(dx,dy,last):
         if (last[0] + dx, last[1] + dy) in walls:
-            return False
+            return
         elif (last[0] + dx, last[1] + dy) in left_box:
             left_chain.add((last[0] + dx, last[1] + dy))
             right_chain.add((last[0] + dx + 1,last[1] + dy))
@@ -68,7 +66,7 @@ def move_robot_and_boxes(robot, left_box, right_box, walls, moves):
         new_robot = (robot[0] + dx, robot[1] + dy)
         left_chain = set()
         right_chain = set()
-        
+        can_move = True
         # Check if the robot moves into a box
         if new_robot in left_box or new_robot in right_box:
             box = new_robot
@@ -160,8 +158,8 @@ robot, left_box, right_box, walls = parse_grid(input_grid)
 robot, left_box, right_box = move_robot_and_boxes(robot, left_box, right_box, walls, input_moves)
 
 # Output the final state
-final_grid = format_grid(robot, left_box, right_box, walls, len(input_grid[0]), len(input_grid))
-print(final_grid)
+#final_grid = format_grid(robot, left_box, right_box, walls, len(input_grid[0]), len(input_grid))
+#print(final_grid)
 
 # Calculate the sum of all box coordinates
 box_sum = sum(x + 100 * y for x, y in left_box)

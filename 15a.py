@@ -29,11 +29,8 @@ def move_robot_and_boxes(robot, boxes, walls, moves):
 
         # Check if the robot moves into a box
         if new_robot in boxes:
-            box = new_robot
-            new_box = (box[0] + dx, box[1] + dy)
-
             # Determine if any box in the chain would hit a wall
-            chain = [box]
+            chain = [new_robot]
             while chain[-1] in boxes:
                 next_box = (chain[-1][0] + dx, chain[-1][1] + dy)
                 chain.append(next_box)
@@ -45,8 +42,8 @@ def move_robot_and_boxes(robot, boxes, walls, moves):
             # Move all boxes in the chain
             for b in reversed(chain):
                 boxes.add(b)
-                next_box = (b[0] - dx, b[1] - dy)
-                boxes.remove(next_box)
+                previous_box = (b[0] - dx, b[1] - dy)
+                boxes.remove(previous_box)
 
         # Update robot position if not moving into a wall
         if new_robot not in walls and new_robot not in boxes:
