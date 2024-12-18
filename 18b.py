@@ -36,13 +36,15 @@ for x in range(rows):
         if y > 0:
             if grid[x][y-1] == '.':
                 G.add_edge((x,y),(x,y-1))
+path = nx.shortest_path(G=G,source=start,target=end)
 while True :
     try:
         (x,y) = obs[0]
         obs = obs[1:]
         grid[x][y] = '#'
         G.remove_node((x,y))
-        nx.shortest_path_length(G=G,source=start,target=end)
+        if (x,y) in path:
+            path = nx.shortest_path(G=G,source=start,target=end)
     except:
         break
     
